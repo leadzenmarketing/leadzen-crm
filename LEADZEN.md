@@ -25,17 +25,23 @@ Kept deliberately small so Twenty updates merge cleanly:
 
 The email sender name is configuration, not code: set `EMAIL_FROM_NAME="Leadzen CRM"` on the server.
 
+## Versioning
+
+`main` = a **stable Twenty release** (recorded in `.leadzen-base`, e.g. `twenty/v2.48.0`) **plus the Leadzen commits on
+top**. Twenty's unreleased `main` branch is never used.
+
 ## Image
 
 `ghcr.io/leadzenmarketing/leadzen-crm` (linux/arm64 — Apple Silicon and Oracle Ampere), built by GitHub Actions on
-every push to `main`. Tags: `latest`, the Twenty version (e.g. `2.x.y`) and `sha-<commit>`.
+every push to `main`. Tags: `latest`, the Twenty version (e.g. `2.48.0`) and `sha-<commit>`.
 
-## Updating from Twenty
+## Updating to a new Twenty release
 
     scripts/leadzen/sync-upstream.sh
 
-Merges `twentyhq/twenty` `main` into this fork on GitHub, re-disables any new upstream workflows and triggers a
-rebuild. If GitHub reports a conflict, merge locally in a full (non-shallow) clone and push.
+Finds Twenty's latest stable release, replays the Leadzen commits on top of it, force-pushes `main`, keeps upstream CI
+workflows disabled and triggers a rebuild. On a cherry-pick conflict it stops so the conflict can be resolved by hand.
+Back up the database before pulling a new image: the server upgrades the schema on start.
 
 ## Terms of Service
 

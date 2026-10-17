@@ -25,9 +25,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # .leadzen-base holds the Twenty release tag (e.g. twenty/v2.48.0); the server needs APP_VERSION as v-prefixed semver.
       - id: version
         run: |
-          echo "app=$(jq -r .version packages/twenty-server/package.json)" >> "$GITHUB_OUTPUT"
+          base="$(tr -d '[:space:]' < .leadzen-base)"
+          app="${base#twenty/}"
+          [[ "$app" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "Bad .leadzen-base: $base"; exit 1; }
+          echo "app=$app" >> "$GITHUB_OUTPUT"
+          echo "semver=${app#v}" >> "$GITHUB_OUTPUT"
           echo "short_sha=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
 
       - uses: docker/setup-buildx-action@v3
@@ -48,7 +53,7 @@ jobs:
           build-args: APP_VERSION=${{ steps.version.outputs.app }}
           tags: |
             ${{ env.IMAGE }}:latest
-            ${{ env.IMAGE }}:${{ steps.version.outputs.app }}
+            ${{ env.IMAGE }}:${{ steps.version.outputs.semver }}
             ${{ env.IMAGE }}:sha-${{ steps.version.outputs.short_sha }}
           labels: |
             org.opencontainers.image.title=Leadzen CRM
