@@ -1,9 +1,9 @@
 import { styled } from '@linaria/react';
-import { Trans, useLingui } from '@lingui/react/macro';
+import { Trans } from '@lingui/react/macro';
 
 import { useWorkspaceBypass } from '@/auth/sign-in-up/hooks/useWorkspaceBypass';
-import { getTwentyWebsiteUrl } from '@/auth/utils/getTwentyWebsiteUrl';
 import { useIsCurrentLocationOnAWorkspace } from '@/domain-manager/hooks/useIsCurrentLocationOnAWorkspace';
+import { LEADZEN_BRANDING } from '@/leadzen/constants/LeadzenBranding';
 import { ONBOARDING_CONTENT_BLOCK_WIDTH } from '@/onboarding/constants/OnboardingContentBlockWidth';
 import { themeCssVariables } from 'twenty-ui/theme';
 
@@ -65,7 +65,6 @@ export const FooterNote = ({
   secondaryAgreement = 'privacyPolicy',
 }: FooterNoteProps) => {
   const { isOnAWorkspace } = useIsCurrentLocationOnAWorkspace();
-  const { i18n } = useLingui();
 
   const { shouldOfferBypass, shouldUseBypass, enableBypass } =
     useWorkspaceBypass();
@@ -73,9 +72,9 @@ export const FooterNote = ({
   if (!isOnAWorkspace) {
     return (
       <StyledCopyContainer>
-        <Trans>By using Twenty, you agree to the</Trans>{' '}
+        <Trans>By using Leadzen CRM, you agree to the</Trans>{' '}
         <a
-          href={getTwentyWebsiteUrl(i18n.locale, 'terms')}
+          href={LEADZEN_BRANDING.termsUrl}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -84,7 +83,7 @@ export const FooterNote = ({
         <Trans>and</Trans>{' '}
         {secondaryAgreement === 'dataProcessingAgreement' ? (
           <a
-            href="https://twenty.com/legal/dpa"
+            href={LEADZEN_BRANDING.privacyUrl}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -92,14 +91,31 @@ export const FooterNote = ({
           </a>
         ) : (
           <a
-            href={getTwentyWebsiteUrl(i18n.locale, 'privacy-policy')}
+            href={LEADZEN_BRANDING.privacyUrl}
             target="_blank"
             rel="noopener noreferrer"
           >
             <Trans>Privacy Policy</Trans>
           </a>
         )}
-        .
+        .{' '}
+        <Trans>Powered by</Trans>{' '}
+        <a
+          href={LEADZEN_BRANDING.poweredByUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Twenty
+        </a>{' '}
+        (
+        <a
+          href={LEADZEN_BRANDING.sourceCodeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Trans>source code</Trans>
+        </a>
+        ).
       </StyledCopyContainer>
     );
   }
@@ -115,7 +131,7 @@ export const FooterNote = ({
         </>
       )}
       <a
-        href={getTwentyWebsiteUrl(i18n.locale, 'privacy-policy')}
+        href={LEADZEN_BRANDING.privacyUrl}
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -123,11 +139,19 @@ export const FooterNote = ({
       </a>
       <StyledSeparator>•</StyledSeparator>
       <a
-        href={getTwentyWebsiteUrl(i18n.locale, 'terms')}
+        href={LEADZEN_BRANDING.termsUrl}
         target="_blank"
         rel="noopener noreferrer"
       >
         <Trans>Terms of Service</Trans>
+      </a>
+      <StyledSeparator>•</StyledSeparator>
+      <a
+        href={LEADZEN_BRANDING.poweredByUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Trans>Powered by Twenty</Trans>
       </a>
     </StyledLinksContainer>
   );

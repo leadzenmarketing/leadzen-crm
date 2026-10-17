@@ -2,6 +2,7 @@ import { type I18n } from '@lingui/core';
 import { Column, Container, Row } from 'react-email';
 import { Link } from 'src/components/Link';
 import { ShadowText } from 'src/components/ShadowText';
+import { LEADZEN_EMAIL_BRANDING } from 'src/constants/LeadzenBranding';
 
 const footerContainerStyle = {
   marginTop: '12px',
@@ -18,45 +19,27 @@ export const Footer = ({ i18n }: FooterProps) => {
         <Column>
           <ShadowText>
             <Link
-              href="https://twenty.com/"
-              value={i18n._('Website')}
+              href={LEADZEN_EMAIL_BRANDING.sourceCodeUrl}
+              value={i18n._('Leadzen CRM')}
+              aria-label={i18n._('Visit the Leadzen CRM repository')}
+            />
+          </ShadowText>
+        </Column>
+        <Column>
+          <ShadowText>
+            <Link
+              href={LEADZEN_EMAIL_BRANDING.poweredByUrl}
+              value={i18n._('Powered by Twenty')}
               aria-label={i18n._("Visit Twenty's website")}
-            />
-          </ShadowText>
-        </Column>
-        <Column>
-          <ShadowText>
-            <Link
-              href="https://github.com/twentyhq/twenty"
-              value={i18n._('Github')}
-              aria-label={i18n._("Visit Twenty's GitHub repository")}
-            />
-          </ShadowText>
-        </Column>
-        <Column>
-          <ShadowText>
-            <Link
-              href="https://docs.twenty.com/getting-started/introduction"
-              value={i18n._('User guide')}
-              aria-label={i18n._("Read Twenty's user guide")}
-            />
-          </ShadowText>
-        </Column>
-        <Column>
-          <ShadowText>
-            <Link
-              href="https://docs.twenty.com/"
-              value={i18n._('Developers')}
-              aria-label={i18n._("Visit Twenty's developer documentation")}
             />
           </ShadowText>
         </Column>
       </Row>
       <ShadowText>
         <>
-          {i18n._('Twenty.com, Public Benefit Corporation')}
+          {i18n._('Leadzen Marketing')}
           <br />
-          {i18n._('San Francisco / Paris')}
+          {i18n._('Bengaluru, India')}
         </>
       </ShadowText>
     </Container>
