@@ -6,19 +6,21 @@ describe('formatToShortNumber', () => {
     expect(formatToShortNumber(123.456)).toBe('123.5');
   });
 
-  it('formats numbers between 1000 and 999999 correctly', () => {
-    expect(formatToShortNumber(1500)).toBe('1.5k');
-    expect(formatToShortNumber(789456)).toBe('789.5k');
+  it('formats thousands with K', () => {
+    expect(formatToShortNumber(1500)).toBe('1.5K');
+    expect(formatToShortNumber(45000)).toBe('45K');
   });
 
-  it('formats numbers between 1000000 and 999999999 correctly', () => {
-    expect(formatToShortNumber(2000000)).toBe('2m');
-    expect(formatToShortNumber(654987654)).toBe('655m');
+  it('formats lakhs with L', () => {
+    expect(formatToShortNumber(580000)).toBe('5.8 L');
+    expect(formatToShortNumber(5800000)).toBe('58 L');
+    expect(formatToShortNumber(789456)).toBe('7.89 L');
   });
 
-  it('formats numbers greater than or equal to 1000000000 correctly', () => {
-    expect(formatToShortNumber(1200000000)).toBe('1.2b');
-    expect(formatToShortNumber(987654321987)).toBe('987.7b');
+  it('formats crores with Cr', () => {
+    expect(formatToShortNumber(38800000)).toBe('3.88 Cr');
+    expect(formatToShortNumber(1200000000)).toBe('120 Cr');
+    expect(formatToShortNumber(987654321987)).toBe('98765.43 Cr');
   });
 
   it('handles numbers with decimal places correctly', () => {
@@ -31,13 +33,13 @@ describe('formatToShortNumber', () => {
   });
 
   it('promotes to the next unit when rounding reaches the boundary', () => {
-    expect(formatToShortNumber(999999)).toBe('1m');
-    expect(formatToShortNumber(999950)).toBe('1m');
-    expect(formatToShortNumber(999999999)).toBe('1b');
+    expect(formatToShortNumber(999.96)).toBe('1K');
+    expect(formatToShortNumber(99999)).toBe('1 L');
+    expect(formatToShortNumber(99995000)).toBe('10 Cr');
   });
 
   it('does not promote just below a rounding boundary', () => {
-    expect(formatToShortNumber(999949)).toBe('999.9k');
+    expect(formatToShortNumber(99949)).toBe('99.9K');
     expect(formatToShortNumber(999)).toBe('999');
   });
 
@@ -47,23 +49,10 @@ describe('formatToShortNumber', () => {
       expect(formatToShortNumber(-123.456)).toBe('-123.5');
     });
 
-    it('formats negative thousands correctly', () => {
-      expect(formatToShortNumber(-1500)).toBe('-1.5k');
-      expect(formatToShortNumber(-789456)).toBe('-789.5k');
-    });
-
-    it('formats negative millions correctly', () => {
-      expect(formatToShortNumber(-2000000)).toBe('-2m');
-      expect(formatToShortNumber(-654987654)).toBe('-655m');
-    });
-
-    it('formats negative billions correctly', () => {
-      expect(formatToShortNumber(-1200000000)).toBe('-1.2b');
-      expect(formatToShortNumber(-987654321987)).toBe('-987.7b');
-    });
-
-    it('promotes negative numbers when rounding reaches the boundary', () => {
-      expect(formatToShortNumber(-999999)).toBe('-1m');
+    it('formats negative thousands, lakhs and crores correctly', () => {
+      expect(formatToShortNumber(-1500)).toBe('-1.5K');
+      expect(formatToShortNumber(-5800000)).toBe('-58 L');
+      expect(formatToShortNumber(-38800000)).toBe('-3.88 Cr');
     });
   });
 });

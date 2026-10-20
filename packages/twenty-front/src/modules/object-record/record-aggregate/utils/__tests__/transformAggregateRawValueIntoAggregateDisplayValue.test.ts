@@ -75,7 +75,7 @@ describe('transformAggregateRawValueIntoAggregateDisplayValue', () => {
         timeZone: 'UTC',
         chartNumberFormat: ChartNumberFormat.SHORT,
       }),
-    ).toBe('153.9k');
+    ).toBe('1.54 L');
   });
 
   it('should format large COUNT values respecting the SPACES_AND_COMMA number format', () => {
@@ -166,7 +166,7 @@ describe('transformAggregateRawValueIntoAggregateDisplayValue', () => {
         localeCatalog: enUS,
         timeZone: 'UTC',
       }),
-    ).toBe('230.4k');
+    ).toBe('2.3 L');
   });
 
   it('should return rating average rounded to one decimal', () => {
@@ -254,7 +254,7 @@ describe('transformAggregateRawValueIntoAggregateDisplayValue', () => {
         timeZone: 'UTC',
         chartNumberFormat: ChartNumberFormat.SHORT,
       }),
-    ).toBe('230.4k');
+    ).toBe('2.3 L');
   });
 
   it('should return short number formatted value with SHORT number format', () => {
@@ -269,7 +269,7 @@ describe('transformAggregateRawValueIntoAggregateDisplayValue', () => {
         timeZone: 'UTC',
         chartNumberFormat: ChartNumberFormat.SHORT,
       }),
-    ).toBe('100m');
+    ).toBe('10 Cr');
   });
 
   it('should return full number formatted value with FULL number format', () => {

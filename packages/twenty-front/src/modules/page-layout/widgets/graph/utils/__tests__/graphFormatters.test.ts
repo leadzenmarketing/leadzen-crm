@@ -70,7 +70,7 @@ describe('formatGraphValue', () => {
       expect(result).toBeDefined();
     });
 
-    it('should format very large numbers with M suffix', () => {
+    it('should format very large numbers with lakh suffix', () => {
       const result = formatGraphValue(1500000, { displayType: 'shortNumber' });
 
       expect(result).toBeDefined();
@@ -220,7 +220,7 @@ describe('formatGraphValue', () => {
         formatNumberFn: germanFormatNumberFn,
       });
 
-      expect(result).toBe('1.2m');
+      expect(result).toBe('12.35 L');
     });
   });
 });
