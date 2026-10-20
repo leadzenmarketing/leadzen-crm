@@ -1,2 +1,3 @@
-export const DEFAULT_WORKSPACE_LOGO =
-  'https://twentyhq.github.io/placeholder-images/workspaces/twenty-logo.png';
+import { LEADZEN_EMAIL_BRANDING } from 'src/constants/LeadzenBranding';
+
+export const DEFAULT_WORKSPACE_LOGO = LEADZEN_EMAIL_BRANDING.logoUrl;

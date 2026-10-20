@@ -2,6 +2,7 @@
 export const LEADZEN_BRANDING = {
   productName: 'Leadzen CRM',
   companyName: 'Leadzen Marketing',
+  logoPath: '/images/leadzen/leadzen-icon-1024.png',
   termsUrl:
     'https://github.com/leadzenmarketing/leadzen-crm/blob/main/LEADZEN.md#terms-of-service',
   privacyUrl:
