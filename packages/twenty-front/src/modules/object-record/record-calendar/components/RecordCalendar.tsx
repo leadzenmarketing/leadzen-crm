@@ -11,6 +11,7 @@ import { RecordCalendarComponentInstanceContext } from '@/object-record/record-c
 import { recordIndexCalendarLayoutComponentState } from '@/object-record/record-index/states/recordIndexCalendarLayoutComponentState';
 import { RecordSelectionEscapeHotkeyEffect } from '@/object-record/record-selection/components/RecordSelectionEscapeHotkeyEffect';
 import { useResetRecordSelection } from '@/object-record/record-selection/hooks/useResetRecordSelection';
+import { SIDE_PANEL_CLICK_OUTSIDE_ID } from '@/side-panel/constants/SidePanelClickOutsideId';
 import { DIALOG_BACKDROP_CLICK_OUTSIDE_ID } from '@/ui/layout/dialog/constants/DialogBackdropClickOutsideId';
 import { PAGE_ACTION_CONTAINER_CLICK_OUTSIDE_ID } from '@/ui/layout/page/constants/PageActionContainerClickOutsideId';
 import { LINK_CHIP_CLICK_OUTSIDE_ID } from '@/ui/navigation/link/constants/LinkChipClickOutsideId';
@@ -53,6 +54,7 @@ export const RecordCalendar = () => {
       PAGE_ACTION_CONTAINER_CLICK_OUTSIDE_ID,
       RECORD_CALENDAR_CARD_CLICK_OUTSIDE_ID,
       LINK_CHIP_CLICK_OUTSIDE_ID,
+      SIDE_PANEL_CLICK_OUTSIDE_ID,
     ],
     listenerId: RECORD_CALENDAR_CLICK_OUTSIDE_LISTENER_ID,
     refs: [],
