@@ -4,6 +4,11 @@
    colours (--t-tag-*) stay as they are so record options keep their hue. */
 
 .light {
+  /* Website palette: paper frame, signal-orange active page in the sidebar. */
+  --lz-frame-background: #f4f2ec;
+  --lz-nav-active-background: #ff5a1f1f;
+  --lz-nav-active-color: #b83a12;
+
   /* #cf4410 keeps white button text at 4.7:1 (WCAG AA). */
   --t-color-blue: #cf4410;
   --t-border-color-blue: #f5ae73;
@@ -30,6 +35,9 @@
 }
 
 .dark {
+  --lz-nav-active-background: #ff5a1f33;
+  --lz-nav-active-color: #ffa057;
+
   --t-color-blue: #d9480f;
   --t-border-color-blue: #7e451d;
   --t-background-transparent-blue: #ff5a1f3d;

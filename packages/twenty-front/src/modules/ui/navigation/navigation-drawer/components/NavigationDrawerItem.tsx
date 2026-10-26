@@ -49,9 +49,11 @@ type StyledItemProps = Pick<
 const StyledItem = styled.button<StyledItemProps>`
   align-items: center;
   background: ${({ active, variant }) =>
-    active || variant === 'placeholder'
+    variant === 'placeholder'
       ? themeCssVariables.background.transparent.light
-      : 'transparent'};
+      : active
+        ? `var(--lz-nav-active-background, ${themeCssVariables.background.transparent.light})`
+        : 'transparent'};
   border: ${({ isSelectedInEditMode }) =>
     isSelectedInEditMode
       ? `1px solid ${themeCssVariables.color.blue}`
@@ -66,7 +68,7 @@ const StyledItem = styled.button<StyledItemProps>`
       return themeCssVariables.font.color.tertiary;
     }
     if (active === true) {
-      return themeCssVariables.font.color.primary;
+      return `var(--lz-nav-active-color, ${themeCssVariables.font.color.primary})`;
     }
     if (isSoon) {
       return themeCssVariables.font.color.light;

@@ -13,7 +13,7 @@ import { styled } from '@linaria/react';
 import { Outlet } from 'react-router-dom';
 import { themeCssVariables } from 'twenty-ui/theme';
 const StyledLayout = styled.div`
-  background: ${themeCssVariables.grayScale.gray3};
+  background: var(--lz-frame-background, ${themeCssVariables.grayScale.gray3});
   display: flex;
   flex-direction: column;
   height: calc(100dvh / var(--t-zoom, 1));
