@@ -1,7 +1,14 @@
+import { currentWorkspaceMemberState } from '@/auth/states/currentWorkspaceMemberState';
 import { LeadzenQuickCreateButton } from '@/leadzen/components/LeadzenQuickCreateButton';
 import { useIsNavigationDrawerContentExpanded } from '@/ui/navigation/navigation-drawer/hooks/useIsNavigationDrawerContentExpanded';
+import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomStateValue';
 import { styled } from '@linaria/react';
-import { IconCheckbox, IconTargetArrow, IconUserPlus } from 'twenty-ui/icon';
+import {
+  IconCheckbox,
+  IconPhone,
+  IconTargetArrow,
+  IconUserPlus,
+} from 'twenty-ui/icon';
 import { themeCssVariables } from 'twenty-ui/theme';
 
 const StyledContainer = styled.div`
@@ -20,6 +27,7 @@ const StyledRow = styled.div`
 // Plain labels: strings missing from Twenty's compiled Lingui catalogs render as ids.
 export const LeadzenQuickActions = () => {
   const isExpanded = useIsNavigationDrawerContentExpanded();
+  const currentWorkspaceMember = useAtomStateValue(currentWorkspaceMemberState);
 
   if (!isExpanded) {
     return null;
@@ -32,6 +40,15 @@ export const LeadzenQuickActions = () => {
         label="New Lead"
         Icon={IconUserPlus}
         isPrimary
+      />
+      <LeadzenQuickCreateButton
+        objectNameSingular="salesActivity"
+        label="Log Call / Visit"
+        Icon={IconPhone}
+        getRecordInput={() => ({
+          doneById: currentWorkspaceMember?.id,
+          doneAt: new Date().toISOString(),
+        })}
       />
       <StyledRow>
         <LeadzenQuickCreateButton
