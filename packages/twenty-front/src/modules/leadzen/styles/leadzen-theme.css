@@ -61,3 +61,15 @@
   --t-accent-accent11: #ffa057;
   --t-accent-accent12: #ffe0c2;
 }
+
+/* Solid accent buttons hover/press with blue10/blue12, which charts also use,
+   so the orange shades are set on the buttons only. */
+.light :is(button, a)[data-color='accent'][data-variant='solid'] {
+  --tw-button-hover: #b83a12;
+  --tw-button-active: #9a3010;
+}
+
+.dark :is(button, a)[data-color='accent'][data-variant='solid'] {
+  --tw-button-hover: #ec5a1f;
+  --tw-button-active: #f04e14;
+}
