@@ -19,6 +19,8 @@ Kept deliberately small so Twenty updates merge cleanly:
   `packages/twenty-front/public/images/leadzen`).
 - Branding constants: `packages/twenty-front/src/modules/leadzen/constants/LeadzenBranding.ts` and
   `packages/twenty-emails/src/constants/LeadzenBranding.ts`.
+- Brand colours: `packages/twenty-front/src/modules/leadzen/styles/leadzen-theme.css` (imported last in
+  `src/index.tsx`) turns Twenty's blue interactive colour and accent scale into Leadzen orange.
 - Sign-in footer: Leadzen terms/privacy links, "Powered by Twenty" and a source-code link.
 - Email logo, footer and a few subjects (verify email, invitation).
 - `.github/workflows/leadzen-build.yml` builds the image; Twenty's own CI workflows are disabled in this fork.
