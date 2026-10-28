@@ -77,6 +77,10 @@ purposes above and is deleted as described below.
 service. Each client's data sits in a separate workspace. Data is stored on servers in India, access is password
 protected, and backups are kept private.
 
+**Help assistant.** The CRM's "Ask Zen" help chat sends only the question a user types, together with our user guide,
+to Google's Gemini API to write the answer. It has no access to lead records, and users are asked not to type customer
+details into it.
+
 **How long we keep it.** For as long as the client uses the service. Within 30 days after a client leaves, its
 workspace and backups are deleted, unless the client asks us to export the data first or the law requires us to keep
 it.
