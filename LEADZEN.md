@@ -53,6 +53,47 @@ the lead data they upload or connect.
 
 ## Privacy Policy
 
-*Draft — to be replaced by Leadzen Marketing's final privacy policy.* Leadzen CRM stores contact and lead data on
-behalf of Leadzen Marketing's clients, solely to manage their leads and measure campaign results, in line with
-India's Digital Personal Data Protection Act, 2023. Data is not sold. Contact: Leadzen Marketing.
+*Effective 28 October 2026.* This policy covers Leadzen CRM and Leadzen Connect, the lead-management tools that
+Leadzen Marketing (Bengaluru, India) runs for its advertising clients.
+
+**Who decides and who processes.** Each client business decides why and how its leads are used; under India's Digital
+Personal Data Protection Act, 2023 the client is the Data Fiduciary. Leadzen Marketing processes that data only on the
+client's instructions, as its Data Processor.
+
+**What we collect.** When a person fills a lead form for one of our clients (a Meta / Facebook / Instagram Lead Ad, a
+website form, or a sheet the client shares with us), we receive the answers they gave: usually name, phone number,
+email, city and the questions asked in that form, plus the campaign, ad and form the lead came from. The client's team
+then adds notes, call outcomes, follow-up dates and deal details in the CRM. We do not collect payment details.
+
+**How we use it.** Only to deliver each lead to the client's own CRM workspace, help the client's sales team follow it
+up, and report campaign results (for example, cost per lead) to that client. We do not sell personal data, do not use
+one client's leads for another client, and do not use lead data for our own advertising.
+
+**Meta Platform data.** Leads from Meta Lead Ads are fetched with the advertiser's permission through the Meta
+Marketing API (`leads_retrieval`) and stored only in that advertiser's workspace. Meta data is used only for the
+purposes above and is deleted as described below.
+
+**Who can see it.** Only users the client approves in its own workspace, and Leadzen Marketing staff who run the
+service. Each client's data sits in a separate workspace. Data is stored on servers in India, access is password
+protected, and backups are kept private.
+
+**How long we keep it.** For as long as the client uses the service. Within 30 days after a client leaves, its
+workspace and backups are deleted, unless the client asks us to export the data first or the law requires us to keep
+it.
+
+**Your rights.** You can ask to see, correct or delete your data, or withdraw consent, by contacting the business whose
+form you filled or by writing to us (below). We will pass your request to that business and act on it.
+
+### Data deletion
+
+To have your data deleted from Leadzen CRM:
+
+1. Email **marketingleadzen@gmail.com** with the subject "Delete my data".
+2. Include the phone number and/or email address you used in the form, and the business name if you know it.
+3. We confirm receipt within 3 working days and delete your lead record, its notes and its activity history from the
+   relevant workspace within 30 days. Backups holding it expire within a further 30 days.
+4. We reply to confirm the deletion.
+
+You can also remove Leadzen's access to your Facebook data at any time from Facebook Settings → Apps and Websites.
+
+**Contact / grievance officer:** Leadzen Marketing, Bengaluru, India — marketingleadzen@gmail.com.
