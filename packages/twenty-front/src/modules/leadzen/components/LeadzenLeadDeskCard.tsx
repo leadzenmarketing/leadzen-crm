@@ -173,8 +173,11 @@ export const LeadzenLeadDeskCard = ({
 
       {hasPhone && (
         <StyledContactRow>
+          {/* With href alone, Button renders its own <a> around the label only, dropping the icon */}
           <Button
-            href={`tel:${callingCode}${phoneNumber}`}
+            nativeButton={false}
+            role="link"
+            render={<a href={`tel:${callingCode}${phoneNumber}`} />}
             startIcon={<IconPhone />}
             color="accent"
             variant="solid"
@@ -183,9 +186,15 @@ export const LeadzenLeadDeskCard = ({
             Call
           </Button>
           <Button
-            href={`https://wa.me/${callingCode.replace('+', '')}${phoneNumber}`}
-            target="_blank"
-            rel="noopener noreferrer"
+            nativeButton={false}
+            role="link"
+            render={
+              <a
+                href={`https://wa.me/${callingCode.replace('+', '')}${phoneNumber}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              />
+            }
             startIcon={<IconBrandWhatsapp />}
             color="success"
             variant="soft"

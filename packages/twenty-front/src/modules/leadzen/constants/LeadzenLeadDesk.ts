@@ -12,6 +12,7 @@ export const LEADZEN_OPEN_LEAD_STATUSES = [
 export const LEADZEN_DESK_OUTCOMES = [
   { value: 'NO_ANSWER', label: 'No answer' },
   { value: 'CALL_BACK', label: 'Call back' },
+  { value: 'CONNECTED', label: 'Connected' },
   { value: 'INTERESTED', label: 'Interested' },
   { value: 'NOT_INTERESTED', label: 'Not interested' },
   { value: 'BOOKED', label: 'Booked' },
