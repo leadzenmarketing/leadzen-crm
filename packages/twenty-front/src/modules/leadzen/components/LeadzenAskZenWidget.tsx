@@ -31,6 +31,7 @@ const StyledLauncher = styled.button<{ isMobile: boolean }>`
   z-index: ${RootStackingContextZIndices.MobileNavigationBar};
 `;
 
+// Sized by its edges on phones: 100vw/100dvh overflow the screen under the app's --t-zoom.
 const StyledPanel = styled.div<{ isMobile: boolean; isOpen: boolean }>`
   background: ${themeCssVariables.background.primary};
   border: 1px solid ${themeCssVariables.border.color.medium};
@@ -41,11 +42,13 @@ const StyledPanel = styled.div<{ isMobile: boolean; isOpen: boolean }>`
   display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
   flex-direction: column;
   height: ${({ isMobile }) =>
-    isMobile ? '100dvh' : 'min(620px, calc(100dvh - 96px))'};
+    isMobile ? 'auto' : 'min(620px, calc(100dvh / var(--t-zoom, 1) - 96px))'};
   left: ${({ isMobile }) => (isMobile ? '0' : '16px')};
   overflow: hidden;
   position: fixed;
-  width: ${({ isMobile }) => (isMobile ? '100vw' : '400px')};
+  right: ${({ isMobile }) => (isMobile ? '0' : 'auto')};
+  top: ${({ isMobile }) => (isMobile ? '0' : 'auto')};
+  width: ${({ isMobile }) => (isMobile ? 'auto' : '400px')};
   z-index: ${RootStackingContextZIndices.MobileNavigationBar};
 `;
 
