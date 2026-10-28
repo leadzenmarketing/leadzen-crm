@@ -6,9 +6,12 @@ import {
 } from '@/leadzen/constants/LeadzenAskZen';
 import { type LeadzenAskZenMessage } from '@/leadzen/types/LeadzenAskZenMessage';
 import { getLeadzenConnectUrl } from '@/leadzen/utils/getLeadzenConnectUrl';
+import { usePushFocusItemToFocusStack } from '@/ui/utilities/focus/hooks/usePushFocusItemToFocusStack';
+import { useRemoveFocusItemFromFocusStackById } from '@/ui/utilities/focus/hooks/useRemoveFocusItemFromFocusStackById';
+import { FocusComponentType } from '@/ui/utilities/focus/types/FocusComponentType';
 import { styled } from '@linaria/react';
 import { isNonEmptyString } from '@sniptt/guards';
-import { type KeyboardEvent, useRef, useState } from 'react';
+import { type KeyboardEvent, useId, useRef, useState } from 'react';
 import { isDefined } from 'twenty-shared/utils';
 import { IconSend } from 'twenty-ui/icon';
 import { Button, Textarea } from 'twenty-ui/primitives/input';
@@ -105,6 +108,26 @@ export const LeadzenAskZen = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [questionsLeft, setQuestionsLeft] = useState<number | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const textareaFocusId = useId();
+  const { pushFocusItemToFocusStack } = usePushFocusItemToFocusStack();
+  const { removeFocusItemFromFocusStackById } =
+    useRemoveFocusItemFromFocusStackById();
+
+  // Without this, typing "?" or other shortcut keys here triggers the CRM's global hotkeys.
+  const handleTextareaFocus = () =>
+    pushFocusItemToFocusStack({
+      focusId: textareaFocusId,
+      component: {
+        type: FocusComponentType.TEXT_AREA,
+        instanceId: textareaFocusId,
+      },
+      globalHotkeysConfig: {
+        enableGlobalHotkeysConflictingWithKeyboard: false,
+      },
+    });
+
+  const handleTextareaBlur = () =>
+    removeFocusItemFromFocusStackById({ focusId: textareaFocusId });
 
   const scrollToEnd = () =>
     window.requestAnimationFrame(() =>
@@ -201,6 +224,8 @@ export const LeadzenAskZen = () => {
               value={draft}
               onValueChange={(value) => setDraft(value)}
               onKeyDown={handleKeyDown}
+              onFocus={handleTextareaFocus}
+              onBlur={handleTextareaBlur}
               placeholder="Ask how to do something…"
               maxLength={LEADZEN_ASK_ZEN_MAX_CHARS}
               autoResize
