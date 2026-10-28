@@ -7,6 +7,7 @@ import {
   SettingsRouteOutlet,
 } from '@/app/components/SettingsRoutes';
 import { type WorkspaceRouteObject } from '@/app/routing/types/WorkspaceRouteObject';
+import { LEADZEN_LEAD_DESK_PATH } from '@/leadzen/constants/LeadzenLeadDesk';
 import { RecordIndexSkeletonLoader } from '@/object-record/record-index/components/RecordIndexSkeletonLoader';
 
 const AgentCoreIndexPage = lazy(() =>
@@ -60,6 +61,12 @@ const AiChatInboxPage = lazy(() =>
 const MobileHomePage = lazy(() =>
   import('~/pages/mobile-home/MobileHomePage').then((module) => ({
     default: module.MobileHomePage,
+  })),
+);
+
+const LeadDeskPage = lazy(() =>
+  import('~/pages/leadzen/LeadDeskPage').then((module) => ({
+    default: module.LeadDeskPage,
   })),
 );
 
@@ -166,6 +173,14 @@ export const createWorkspaceRouteObjects = ({
       element: (
         <LazyRoute>
           <MobileHomePage />
+        </LazyRoute>
+      ),
+    },
+    {
+      path: LEADZEN_LEAD_DESK_PATH,
+      element: (
+        <LazyRoute>
+          <LeadDeskPage />
         </LazyRoute>
       ),
     },

@@ -2,6 +2,7 @@ import { currentUserState } from '@/auth/states/currentUserState';
 import { metadataStoreState } from '@/metadata-store/states/metadataStoreState';
 import { metadataStoreStatusFamilySelector } from '@/metadata-store/states/metadataStoreStatusFamilySelector';
 import { useNavigationMenuItemSectionItems } from '@/navigation-menu-item/display/hooks/useNavigationMenuItemSectionItems';
+import { LEADZEN_LEAD_DESK_PATH } from '@/leadzen/constants/LeadzenLeadDesk';
 import { type ObjectPathInfo } from '@/navigation/types/ObjectPathInfo';
 import { getFirstNavigationMenuItemLink } from '@/navigation/utils/getFirstNavigationMenuItemLink';
 import { computeObjectViewTargetIds } from '@/views/utils/computeObjectViewTargetIds';
@@ -99,7 +100,16 @@ export const useDefaultHomePagePath = () => {
     }
 
     if (isMobile) {
-      return AppPath.Home;
+      if (!areObjectMetadataItemsLoaded) {
+        return AppPath.Index;
+      }
+
+      // Leadzen: salespeople on phones start on the Lead Desk.
+      return objectMetadataItems.some(
+        (item) => item.nameSingular === 'salesActivity',
+      )
+        ? LEADZEN_LEAD_DESK_PATH
+        : AppPath.Home;
     }
 
     // Both stores are empty right after login; deciding now would pick a wrong fallback.
@@ -129,6 +139,7 @@ export const useDefaultHomePagePath = () => {
   }, [
     currentUser,
     isMobile,
+    objectMetadataItems,
     readableNonSystemObjectMetadataItems,
     areObjectMetadataItemsLoaded,
     areNavigationMenuItemsLoaded,

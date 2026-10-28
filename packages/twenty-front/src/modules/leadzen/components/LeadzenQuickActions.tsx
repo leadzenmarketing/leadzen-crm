@@ -1,14 +1,21 @@
 import { currentWorkspaceMemberState } from '@/auth/states/currentWorkspaceMemberState';
 import { LeadzenQuickCreateButton } from '@/leadzen/components/LeadzenQuickCreateButton';
+import { LEADZEN_LEAD_DESK_PATH } from '@/leadzen/constants/LeadzenLeadDesk';
+import { objectMetadataItemFamilySelector } from '@/object-metadata/states/objectMetadataItemFamilySelector';
 import { useIsNavigationDrawerContentExpanded } from '@/ui/navigation/navigation-drawer/hooks/useIsNavigationDrawerContentExpanded';
+import { useAtomFamilySelectorValue } from '@/ui/utilities/state/jotai/hooks/useAtomFamilySelectorValue';
 import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomStateValue';
 import { styled } from '@linaria/react';
+import { useNavigate } from 'react-router-dom';
+import { isDefined } from 'twenty-shared/utils';
 import {
+  IconCalendarDue,
   IconCheckbox,
   IconPhone,
   IconTargetArrow,
   IconUserPlus,
 } from 'twenty-ui/icon';
+import { Button } from 'twenty-ui/primitives/input';
 import { themeCssVariables } from 'twenty-ui/theme';
 
 const StyledContainer = styled.div`
@@ -28,6 +35,11 @@ const StyledRow = styled.div`
 export const LeadzenQuickActions = () => {
   const isExpanded = useIsNavigationDrawerContentExpanded();
   const currentWorkspaceMember = useAtomStateValue(currentWorkspaceMemberState);
+  const navigate = useNavigate();
+  const activityObjectMetadataItem = useAtomFamilySelectorValue(
+    objectMetadataItemFamilySelector,
+    { objectName: 'salesActivity', objectNameType: 'singular' },
+  );
 
   if (!isExpanded) {
     return null;
@@ -35,6 +47,18 @@ export const LeadzenQuickActions = () => {
 
   return (
     <StyledContainer>
+      {isDefined(activityObjectMetadataItem) && (
+        <Button
+          startIcon={<IconCalendarDue />}
+          color="accent"
+          variant="outline"
+          size="md"
+          fullWidth
+          onClick={() => navigate(LEADZEN_LEAD_DESK_PATH)}
+        >
+          Lead Desk
+        </Button>
+      )}
       <LeadzenQuickCreateButton
         objectNameSingular="person"
         label="New Lead"
