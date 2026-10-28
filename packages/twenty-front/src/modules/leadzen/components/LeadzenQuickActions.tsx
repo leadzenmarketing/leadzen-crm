@@ -1,5 +1,6 @@
 import { currentWorkspaceMemberState } from '@/auth/states/currentWorkspaceMemberState';
 import { LeadzenQuickCreateButton } from '@/leadzen/components/LeadzenQuickCreateButton';
+import { LEADZEN_ASK_ZEN_PATH } from '@/leadzen/constants/LeadzenAskZen';
 import { LEADZEN_LEAD_DESK_PATH } from '@/leadzen/constants/LeadzenLeadDesk';
 import { objectMetadataItemFamilySelector } from '@/object-metadata/states/objectMetadataItemFamilySelector';
 import { useIsNavigationDrawerContentExpanded } from '@/ui/navigation/navigation-drawer/hooks/useIsNavigationDrawerContentExpanded';
@@ -12,6 +13,7 @@ import {
   IconCalendarDue,
   IconCheckbox,
   IconPhone,
+  IconSparkles,
   IconTargetArrow,
   IconUserPlus,
 } from 'twenty-ui/icon';
@@ -86,6 +88,15 @@ export const LeadzenQuickActions = () => {
           Icon={IconCheckbox}
         />
       </StyledRow>
+      <Button
+        startIcon={<IconSparkles />}
+        variant="ghost"
+        size="md"
+        fullWidth
+        onClick={() => navigate(LEADZEN_ASK_ZEN_PATH)}
+      >
+        Ask Zen (help)
+      </Button>
     </StyledContainer>
   );
 };
