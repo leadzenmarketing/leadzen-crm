@@ -6,6 +6,7 @@ import { FileUploadProvider } from '@/file-upload/components/FileUploadProvider'
 import { InformationBannerIsImpersonating } from '@/information-banner/components/impersonate/InformationBannerIsImpersonating';
 import { KeyboardShortcutMenu } from '@/keyboard-shortcut-menu/components/KeyboardShortcutMenu';
 import { LayoutCustomizationBar } from '@/layout-customization/components/LayoutCustomizationBar';
+import { LeadzenAskZenWidget } from '@/leadzen/components/LeadzenAskZenWidget';
 import { MobileNavigationBar } from '@/navigation/components/MobileNavigationBar';
 import { PageDragDropProvider } from '@/navigation-menu-item/display/dnd/providers/PageDragDropProvider';
 import { useIsMobile } from 'twenty-ui/utilities';
@@ -84,6 +85,7 @@ export const DefaultLayout = () => {
               </PageDragDropProvider>
             </StyledPageContainer>
             {isMobile && <MobileNavigationBar />}
+            <LeadzenAskZenWidget />
           </AppErrorBoundary>
         </StyledLayout>
       </FileUploadProvider>

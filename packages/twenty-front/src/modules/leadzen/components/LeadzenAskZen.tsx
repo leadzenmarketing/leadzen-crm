@@ -5,13 +5,12 @@ import {
   LEADZEN_ASK_ZEN_SUGGESTIONS,
 } from '@/leadzen/constants/LeadzenAskZen';
 import { type LeadzenAskZenMessage } from '@/leadzen/types/LeadzenAskZenMessage';
+import { LeadzenAskZenHandoff } from '@/leadzen/components/LeadzenAskZenHandoff';
+import { useLeadzenTypingFocus } from '@/leadzen/hooks/useLeadzenTypingFocus';
 import { getLeadzenConnectUrl } from '@/leadzen/utils/getLeadzenConnectUrl';
-import { usePushFocusItemToFocusStack } from '@/ui/utilities/focus/hooks/usePushFocusItemToFocusStack';
-import { useRemoveFocusItemFromFocusStackById } from '@/ui/utilities/focus/hooks/useRemoveFocusItemFromFocusStackById';
-import { FocusComponentType } from '@/ui/utilities/focus/types/FocusComponentType';
 import { styled } from '@linaria/react';
 import { isNonEmptyString } from '@sniptt/guards';
-import { type KeyboardEvent, useId, useRef, useState } from 'react';
+import { type KeyboardEvent, useRef, useState } from 'react';
 import { isDefined } from 'twenty-shared/utils';
 import { IconSend } from 'twenty-ui/icon';
 import { Button, Textarea } from 'twenty-ui/primitives/input';
@@ -22,8 +21,6 @@ const StyledChat = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin: 0 auto;
-  max-width: 720px;
   width: 100%;
 `;
 
@@ -77,6 +74,15 @@ const StyledNote = styled.div<{ isError?: boolean }>`
   font-size: ${themeCssVariables.font.size.sm};
 `;
 
+const StyledHandoffLink = styled.div`
+  align-items: center;
+  color: ${themeCssVariables.font.color.tertiary};
+  display: flex;
+  flex-wrap: wrap;
+  font-size: ${themeCssVariables.font.size.sm};
+  gap: ${themeCssVariables.spacing[1]};
+`;
+
 const StyledComposer = styled.div`
   border-top: 1px solid ${themeCssVariables.border.color.medium};
   display: flex;
@@ -108,26 +114,8 @@ export const LeadzenAskZen = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [questionsLeft, setQuestionsLeft] = useState<number | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const textareaFocusId = useId();
-  const { pushFocusItemToFocusStack } = usePushFocusItemToFocusStack();
-  const { removeFocusItemFromFocusStackById } =
-    useRemoveFocusItemFromFocusStackById();
-
-  // Without this, typing "?" or other shortcut keys here triggers the CRM's global hotkeys.
-  const handleTextareaFocus = () =>
-    pushFocusItemToFocusStack({
-      focusId: textareaFocusId,
-      component: {
-        type: FocusComponentType.TEXT_AREA,
-        instanceId: textareaFocusId,
-      },
-      globalHotkeysConfig: {
-        enableGlobalHotkeysConflictingWithKeyboard: false,
-      },
-    });
-
-  const handleTextareaBlur = () =>
-    removeFocusItemFromFocusStackById({ focusId: textareaFocusId });
+  const typingFocus = useLeadzenTypingFocus();
+  const [isHandoffOpen, setIsHandoffOpen] = useState(false);
 
   const scrollToEnd = () =>
     window.requestAnimationFrame(() =>
@@ -212,6 +200,40 @@ export const LeadzenAskZen = () => {
           ),
         )}
         {isSending && <StyledNote>Zen is thinking…</StyledNote>}
+        {messages.some((message) => message.role === 'assistant') &&
+          !isHandoffOpen && (
+            <StyledHandoffLink>
+              Still stuck?
+              <Button
+                size="sm"
+                variant="link"
+                color="accent"
+                onClick={() => {
+                  setIsHandoffOpen(true);
+                  scrollToEnd();
+                }}
+              >
+                Talk to the Leadzen team
+              </Button>
+            </StyledHandoffLink>
+          )}
+        {isHandoffOpen && (
+          <LeadzenAskZenHandoff
+            messages={messages}
+            onCancel={() => setIsHandoffOpen(false)}
+            onSent={() => {
+              setIsHandoffOpen(false);
+              setMessages((current) => [
+                ...current,
+                {
+                  role: 'assistant',
+                  text: 'Sent to the Leadzen team. Someone will get back to you soon by email or a call.',
+                },
+              ]);
+              scrollToEnd();
+            }}
+          />
+        )}
         {isDefined(errorMessage) && (
           <StyledNote isError>{errorMessage}</StyledNote>
         )}
@@ -224,8 +246,8 @@ export const LeadzenAskZen = () => {
               value={draft}
               onValueChange={(value) => setDraft(value)}
               onKeyDown={handleKeyDown}
-              onFocus={handleTextareaFocus}
-              onBlur={handleTextareaBlur}
+              onFocus={typingFocus.onFocus}
+              onBlur={typingFocus.onBlur}
               placeholder="Ask how to do something…"
               maxLength={LEADZEN_ASK_ZEN_MAX_CHARS}
               autoResize

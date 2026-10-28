@@ -1,5 +1,3 @@
-export const LEADZEN_ASK_ZEN_PATH = '/ask-zen';
-
 // Same limits as HELP_MAX_TURNS / HELP_MAX_CHARS in Leadzen Connect.
 export const LEADZEN_ASK_ZEN_MAX_TURNS = 10;
 export const LEADZEN_ASK_ZEN_MAX_CHARS = 1000;

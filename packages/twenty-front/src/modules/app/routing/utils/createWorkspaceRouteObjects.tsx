@@ -7,7 +7,6 @@ import {
   SettingsRouteOutlet,
 } from '@/app/components/SettingsRoutes';
 import { type WorkspaceRouteObject } from '@/app/routing/types/WorkspaceRouteObject';
-import { LEADZEN_ASK_ZEN_PATH } from '@/leadzen/constants/LeadzenAskZen';
 import { LEADZEN_LEAD_DESK_PATH } from '@/leadzen/constants/LeadzenLeadDesk';
 import { RecordIndexSkeletonLoader } from '@/object-record/record-index/components/RecordIndexSkeletonLoader';
 
@@ -68,12 +67,6 @@ const MobileHomePage = lazy(() =>
 const LeadDeskPage = lazy(() =>
   import('~/pages/leadzen/LeadDeskPage').then((module) => ({
     default: module.LeadDeskPage,
-  })),
-);
-
-const AskZenPage = lazy(() =>
-  import('~/pages/leadzen/AskZenPage').then((module) => ({
-    default: module.AskZenPage,
   })),
 );
 
@@ -188,14 +181,6 @@ export const createWorkspaceRouteObjects = ({
       element: (
         <LazyRoute>
           <LeadDeskPage />
-        </LazyRoute>
-      ),
-    },
-    {
-      path: LEADZEN_ASK_ZEN_PATH,
-      element: (
-        <LazyRoute>
-          <AskZenPage />
         </LazyRoute>
       ),
     },
